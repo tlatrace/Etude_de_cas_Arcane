@@ -1,8 +1,12 @@
 Comment utiliser cette API et son repository ?
 
+
+
 I.	Installation des outils.
 
-Cette API REST a été développée en Python 3.7.3 sous l'environnement de développement Pycharm. Elle est disponible dans le dossier API_REAL_ESTATE sous le nom de API_REAL_ESTATE. Afin de créer des pages web plus facilement, j’ai travaillé avec le framework Flask, que j’ai dû importer dans mon projet. J’ai également importer flask-httpauth, une extension de Flask permettant de simplifier l’authentification HTTP des utilisateurs de l’API. Pour pouvoir faire des requêtes à l’API directement dans le terminal Python, l’outil cURL a été installé via la commande pip. Dans le code, des exemples de requêtes HTTP à saisir dans le terminal sont disponibles en commentaire sous chaque fonction. Notons que le serveur utilisé pour cette API est le serveur local de la machine hébergeant le code. Enfin, toute cette API a été conçue pour que les fichiers renvoyés sur les différentes adresses HTTP soient au format JSON.
+Cette API REST a été développée en Python 3.7.3 sous l'environnement de développement Pycharm. Elle est disponible dans le dossier API_REAL_ESTATE sous le nom de API_REAL_ESTATE_v2.py. Afin de créer des pages web plus facilement, j’ai travaillé avec le framework Flask, que j’ai dû importer dans mon projet. J’ai également importer flask-httpauth, une extension de Flask permettant de simplifier l’authentification HTTP des utilisateurs de l’API. Pour pouvoir faire des requêtes à l’API directement dans le terminal Python, l’outil cURL a été installé via la commande pip. Dans le code, des exemples de requêtes HTTP à saisir dans le terminal sont disponibles en commentaire sous chaque fonction. Notons que le serveur utilisé pour cette API est le serveur local de la machine hébergeant le code. Enfin, toute cette API a été conçue pour que les fichiers renvoyés sur les différentes adresses HTTP soient au format JSON.
+
+
 
 II.	Explication du code.
 
@@ -30,11 +34,14 @@ PUT		/real_estate/api/v1/user/<int:user_id>		L’utilisateur modifie ses informa
 
 Dans le code Python, chaque fonction est précédée par un commentaire expliquant à quoi elle sert et dans quel cas l’utiliser.
 
+
+
 III.	Limites de l’API.
 
 Le principal défaut de mon API concerne la base de données. Actuellement, les données de nos utilisateurs et de nos biens immobiliers sont stockées dans des listes de dictionnaires, les clés du dictionnaire correspondant aux informations personnelles des utilisateurs ou aux caractéristiques du bien immobilier. Ce n’est pas du tout conseillé du point de vue de la sécurité informatique des données. En effet, bien que cela soit optionnel, les API de type REST doivent respecter la règle du « code on demand » stipulant que le serveur peut fournir au client le code de l’API pour qu’il puisse l’utiliser dans son propre contexte. Toutes les données seraient alors accessibles. Pour éviter cela, il aurait fallu lier le code Python à une base de données extérieure dans laquelle seraient stockées les données des utilisateurs et des bien immobiliers. Par manque de temps, je n’ai pas pu implémenter cette base de données. Cependant, j’ai fait des tests sur Python pour utiliser le module Flask-SQLAlchemy qui permet de gérer des bases de données et qui fonctionne avec PostgreSQL. Les tests sont disponibles dans le dossier test_database_API.
 De plus, la fonctionnalité bonus « un propriétaire ne peut modifier que les caractéristiques de son bien sans avoir accès à l’édition des autres biens » n’a pas encore été implémentée, faute de temps. Pour implémenter celle-ci, il aurait fallu que le nom du propriétaire connecté sur la plateforme soit présent dans la requête HTTP. En effet, la règle « stateless » que doivent respecter les API REST impose que le serveur ne peut pas stocker d’informations d’une requête et les utiliser pour une autre requête. Cependant, je n’ai pas encore trouvé le moyen de fournir dans la requête HTTP le nom de l’utilisateur réellement connecté, et ce en évitant les usurpations d’identité (l’utilisateur connecté pourrait saisir dans la requête HTTP le nom d’un autre utilisateur).
 Enfin, lorsque l’API sera opérationnelle et un peu plus optimisée, il serait préférable de l’héberger sur un serveur Web. Actuellement, celle-ci est uniquement disponible en local sur ma machine.
+
 
 
 IV.	Approche/organisation de l’étude de cas. 
